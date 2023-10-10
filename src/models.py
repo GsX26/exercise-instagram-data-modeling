@@ -9,7 +9,7 @@ from eralchemy2 import render_er
 Base = declarative_base()
 
 
-class user(Base):
+class User(Base):
     __tablename__ = 'user'
     id = Column(Integer, primary_key=True)
     username = Column(String(250), nullable=False)
@@ -19,26 +19,26 @@ class user(Base):
     signup_date = Column(String(250), nullable=False)
     followers = relationship('Follower')
 
-class post(Base):
+class Post(Base):
     __tablename__ = 'post'
     id = Column(Integer, primary_key=True)
     user_id = Column(Integer, ForeignKey('user.id'))
     date = relationship("Post_Type")
     comment = relationship('Comment')
 
-class post_Type(Base):
+class Post_Type(Base):
     __tablename__ = 'post_type'
     id = Column(Integer, primary_key=True)
     post_id = Column(Integer, ForeignKey('post.id'))
     post_type = Column(String(250), nullable=False)
 
-class likes(Base):
+class Likes(Base):
     __tablename__ = 'likes'
     id = Column(Integer, primary_key=True)
     user_id = Column(Integer, ForeignKey("user.id"), nullable=False)
     post_id = Column(Integer, ForeignKey("post.id"))
     
-class comment(Base):
+class Comment(Base):
     __tablename__ = 'comment'
     id = Column(Integer, primary_key=True)
     created_by_user_id = Column(Integer, ForeignKey("user.id"), nullable=False)
@@ -47,7 +47,7 @@ class comment(Base):
     post_id = Column(Integer, ForeignKey('post.id'))
     date = Column(String(250), nullable=False)
     
-class follower(Base) :
+class Follower(Base) :
     __tablename__ = 'follower'
     id = Column(Integer, primary_key=True)
     following_user_id = Column(Integer, ForeignKey("user.id"))
